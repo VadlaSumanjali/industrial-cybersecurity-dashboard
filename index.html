@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEGIS OT | Industrial Threat & Attack Path Intelligence Platform</title>
+  <meta name="description" content="Enterprise Industrial / Operational Technology (OT/ICS) Cybersecurity and Attack Path Investigation Workspace.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" aria-hidden="true">
+    <defs>
+      <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </symbol>
+      <symbol id="icon-shield-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </symbol>
+      <symbol id="icon-alert-triangle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+        <line x1="12" y1="9" x2="12" y2="13"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </symbol>
+      <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+        <line x1="6" y1="6" x2="6.01" y2="6"/>
+        <line x1="6" y1="18" x2="6.01" y2="18"/>
+      </symbol>
+      <symbol id="icon-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="4" width="16" height="16" rx="2"/>
+        <rect x="9" y="9" width="6" height="6"/>
+        <line x1="9" y1="1" x2="9" y2="4"/>
+        <line x1="15" y1="1" x2="15" y2="4"/>
+        <line x1="9" y1="20" x2="9" y2="23"/>
+        <line x1="15" y1="20" x2="15" y2="23"/>
+        <line x1="20" y1="9" x2="23" y2="9"/>
+        <line x1="20" y1="14" x2="23" y2="14"/>
+        <line x1="1" y1="9" x2="4" y2="9"/>
+        <line x1="1" y1="14" x2="4" y2="14"/>
+      </symbol>
+      <symbol id="icon-crosshair" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="22" y1="12" x2="18" y2="12"/>
+        <line x1="6" y1="12" x2="2" y2="12"/>
+        <line x1="12" y1="6" x2="12" y2="2"/>
+        <line x1="12" y1="22" x2="12" y2="18"/>
+      </symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </symbol>
+      <symbol id="icon-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+      </symbol>
+      <symbol id="icon-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </symbol>
+      <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+      </symbol>
+      <symbol id="icon-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </symbol>
+      <symbol id="icon-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+      </symbol>
+      <symbol id="icon-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23 4 23 10 17 10"/>
+        <polyline points="1 20 1 14 7 14"/>
+        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+      </symbol>
+      <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </symbol>
+      <symbol id="icon-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="16" x2="12" y2="12"/>
+        <line x1="12" y1="8" x2="12.01" y2="8"/>
+      </symbol>
+      <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </symbol>
+      <symbol id="icon-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="4 17 10 11 4 5"/>
+        <line x1="12" y1="19" x2="20" y2="19"/>
+      </symbol>
+      <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </symbol>
+      <symbol id="icon-radar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
+        <path d="M12 6a6 6 0 1 0 6 6 6 6 0 0 0-6-6zm0 10a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"/>
+        <line x1="12" y1="12" x2="19" y2="5"/>
+      </symbol>
+      <symbol id="icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"/>
+        <line x1="5" y1="12" x2="19" y2="12"/>
+      </symbol>
+      <symbol id="icon-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+      </symbol>
+      <symbol id="icon-maximize" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+      </symbol>
+      <symbol id="icon-book-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </symbol>
+      <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="app-header" role="banner">
+    <div class="brand-section">
+      <div class="brand-logo" aria-hidden="true">
+        <svg class="icon icon-md" style="color:#000;"><use href="#icon-shield"></use></svg>
+      </div>
+      <div class="brand-name-group">
+        <div class="brand-title">
+          AEGIS <span class="brand-badge">OT</span>
+        </div>
+        <span class="brand-subtitle">ICS / SCADA CYBER DEFENSE</span>
+      </div>
+    </div>
+
+    <nav class="nav-tabs" role="navigation" aria-label="Main Navigation">
+      <button class="nav-tab-btn active" data-view="dashboard" id="nav-btn-dashboard" aria-current="page">
+        <svg class="icon icon-sm"><use href="#icon-activity"></use></svg>
+        <span>Dashboard</span>
+      </button>
+      <button class="nav-tab-btn" data-view="attack-paths" id="nav-btn-attack-paths">
+        <svg class="icon icon-sm"><use href="#icon-crosshair"></use></svg>
+        <span>Attack Paths</span>
+      </button>
+      <button class="nav-tab-btn" data-view="assets" id="nav-btn-assets">
+        <svg class="icon icon-sm"><use href="#icon-server"></use></svg>
+        <span>Asset Inventory</span>
+      </button>
+      <button class="nav-tab-btn" data-view="findings" id="nav-btn-findings">
+        <svg class="icon icon-sm"><use href="#icon-shield-alert"></use></svg>
+        <span>Findings</span>
+      </button>
+      <button class="nav-tab-btn" data-view="design-system" id="nav-btn-design-system">
+        <svg class="icon icon-sm"><use href="#icon-book-open"></use></svg>
+        <span>Design System</span>
+      </button>
+    </nav>
+
+    <div class="header-actions">
+
+      <div class="state-switcher-container" title="Switch Operational Demonstration State">
+        <span class="state-label">DEMO STATE:</span>
+        <select id="operational-state-select" class="state-select" aria-label="Select Operational Demonstration State">
+          <option value="high-risk" selected>High Risk (Critical Path)</option>
+          <option value="healthy">Healthy / Baseline</option>
+          <option value="degraded">Degraded Telemetry</option>
+        </select>
+      </div>
+
+      <button class="btn-secondary" id="btn-open-rationale" title="Open Architectural & Design Rationale Documentation">
+        <svg class="icon icon-sm" style="color:var(--color-orange-500);"><use href="#icon-info"></use></svg>
+        <span>Design Rationale</span>
+      </button>
+
+      <button class="btn-icon" aria-label="View notifications" title="4 unacknowledged alerts">
+        <svg class="icon icon-sm"><use href="#icon-bell"></use></svg>
+        <span class="notification-badge">4</span>
+      </button>
+
+      <div class="user-profile" title="Logged in as OT SOC Lead / CISO">
+        <div class="user-avatar">OT</div>
+        <span style="font-weight:600;">SOC Lead</span>
+      </div>
+
+      <button class="mobile-menu-toggle" id="btn-mobile-menu" aria-label="Open mobile navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
+        <svg class="icon icon-md"><use href="#icon-menu"></use></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop" aria-hidden="true"></div>
+  <aside class="mobile-nav-drawer" id="mobile-nav-drawer" role="dialog" aria-label="Mobile Navigation Drawer" aria-hidden="true">
+    <div class="mobile-drawer-header">
+      <div class="brand-section">
+        <div class="brand-logo" aria-hidden="true">
+          <svg class="icon icon-md" style="color:#000;"><use href="#icon-shield"></use></svg>
+        </div>
+        <div class="brand-name-group">
+          <div class="brand-title">
+            AEGIS <span class="brand-badge">OT</span>
+          </div>
+          <span class="brand-subtitle">ICS CYBER DEFENSE</span>
+        </div>
+      </div>
+      <button class="btn-icon" id="btn-close-mobile-drawer" aria-label="Close navigation menu">
+        <svg class="icon icon-md"><use href="#icon-close"></use></svg>
+      </button>
+    </div>
+
+    <nav class="mobile-nav-list" role="navigation" aria-label="Mobile Navigation">
+      <button class="mobile-nav-item active" data-view="dashboard">
+        <svg class="icon icon-sm"><use href="#icon-activity"></use></svg>
+        <span>Dashboard</span>
+      </button>
+      <button class="mobile-nav-item" data-view="attack-paths">
+        <svg class="icon icon-sm"><use href="#icon-crosshair"></use></svg>
+        <span>Attack Paths</span>
+      </button>
+      <button class="mobile-nav-item" data-view="assets">
+        <svg class="icon icon-sm"><use href="#icon-server"></use></svg>
+        <span>Asset Inventory</span>
+      </button>
+      <button class="mobile-nav-item" data-view="findings">
+        <svg class="icon icon-sm"><use href="#icon-shield-alert"></use></svg>
+        <span>Findings</span>
+      </button>
+      <button class="mobile-nav-item" data-view="design-system">
+        <svg class="icon icon-sm"><use href="#icon-book-open"></use></svg>
+        <span>Design System</span>
+      </button>
+    </nav>
+
+    <div class="mobile-drawer-footer">
+      <div class="mobile-state-section">
+        <span class="state-label">DEMO OPERATIONAL STATE:</span>
+        <select id="mobile-operational-state-select" class="state-select" aria-label="Select Operational Demonstration State">
+          <option value="high-risk" selected>High Risk (Critical Path)</option>
+          <option value="healthy">Healthy / Baseline</option>
+          <option value="degraded">Degraded Telemetry</option>
+        </select>
+      </div>
+
+      <button class="btn-secondary" id="btn-mobile-rationale" style="width:100%; justify-content:center;">
+        <svg class="icon icon-sm" style="color:var(--color-orange-500);"><use href="#icon-info"></use></svg>
+        <span>Design Rationale</span>
+      </button>
+
+      <div class="user-profile" style="width:100%; justify-content:center;">
+        <div class="user-avatar">OT</div>
+        <span style="font-weight:600;">SOC Lead (CISO)</span>
+      </div>
+    </div>
+  </aside>
+
+  <section class="global-filter-bar" role="search" aria-label="Global Data Filters">
+    <div class="filter-group">
+
+      <div class="filter-item">
+        <span class="filter-label">Site:</span>
+        <select id="filter-site" class="filter-select" aria-label="Filter by Site or Plant">
+          <option value="all">All Sites (Plant 1, 2, 3)</option>
+          <option value="Plant 1">Plant 1 - Refining</option>
+          <option value="Plant 2">Plant 2 - Chemical</option>
+          <option value="Substation 3">Substation 3 - HV</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <span class="filter-label">Purdue Zone:</span>
+        <select id="filter-zone" class="filter-select" aria-label="Filter by Purdue Model Zone">
+          <option value="all">All Purdue Zones (L0 - L4)</option>
+          <option value="L4">Level 4: Enterprise IT</option>
+          <option value="L35">Level 3.5: Industrial DMZ</option>
+          <option value="L3">Level 3: Operations</option>
+          <option value="L2">Level 2: Supervisory SCADA</option>
+          <option value="L1">Level 1: Control (PLCs)</option>
+          <option value="L0">Level 0: Physical Process</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <span class="filter-label">Severity:</span>
+        <select id="filter-severity" class="filter-select" aria-label="Filter by Severity">
+          <option value="all">All Severities</option>
+          <option value="critical">Critical</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <span class="filter-label">Criticality:</span>
+        <select id="filter-criticality" class="filter-select" aria-label="Filter by Asset Criticality">
+          <option value="all">All Criticalities</option>
+          <option value="Tier 1">Tier 1: Crown Jewels</option>
+          <option value="Tier 2">Tier 2: Core Operational</option>
+          <option value="Tier 3">Tier 3: Auxiliary</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <span class="filter-label">Time:</span>
+        <select id="filter-time" class="filter-select" aria-label="Filter by Time Range">
+          <option value="1h">Last 1 Hour</option>
+          <option value="24h" selected>Last 24 Hours</option>
+          <option value="7d">Last 7 Days</option>
+          <option value="30d">Last 30 Days</option>
+        </select>
+      </div>
+
+      <div class="search-input-wrapper">
+        <svg class="icon icon-sm"><use href="#icon-search"></use></svg>
+        <input type="text" id="global-search-input" class="search-input" placeholder="Search asset, IP, CVE..." aria-label="Global search">
+      </div>
+    </div>
+
+    <div class="filter-actions">
+      <span class="filter-active-indicator" id="filter-status-tag">Filters Active</span>
+      <button class="btn-secondary" id="btn-reset-filters" title="Reset all criteria to default">
+        <svg class="icon icon-sm"><use href="#icon-refresh"></use></svg>
+        <span>Reset Filters</span>
+      </button>
+    </div>
+  </section>
+
+  <aside id="degraded-banner" class="degraded-banner hidden" role="alert">
+    <div class="degraded-content">
+      <span class="degraded-badge">
+        <svg class="icon icon-sm"><use href="#icon-alert-triangle"></use></svg>
+        DATA GAP
+      </span>
+      <span class="degraded-text" id="degraded-text-slot">
+
+      </span>
+    </div>
+    <div class="degraded-actions">
+      <button class="btn-secondary" style="font-size:11px; padding:3px 8px;" onclick="document.getElementById('operational-state-select').value='high-risk'; document.getElementById('operational-state-select').dispatchEvent(new Event('change'));">
+        Dismiss Warning
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-viewport" role="main">
+
+    <section id="view-dashboard" class="view-section active-view" aria-label="Cybersecurity Dashboard">
+      <div class="dashboard-grid">
+
+        <div class="hero-posture-row">
+
+          <div class="posture-card posture-gauge-card" id="card-posture-gauge">
+            <div class="posture-header">
+              <span class="posture-label">Security Posture</span>
+              <svg class="icon icon-sm" style="color:var(--color-orange-500);"><use href="#icon-shield"></use></svg>
+            </div>
+            <div class="posture-value-group">
+              <span class="posture-value" id="kpi-posture-val">82</span>
+              <span class="posture-denom">/ 100</span>
+            </div>
+            <div class="posture-subtext" id="kpi-posture-sub">
+              <span class="badge badge-critical">Immediate Action</span> Crown Jewel exposed
+            </div>
+          </div>
+
+          <div class="posture-card kpi-critical" onclick="document.getElementById('nav-btn-findings').click();" title="Click to view critical findings">
+            <div class="posture-header">
+              <span class="posture-label">Critical Findings</span>
+              <svg class="icon icon-sm" style="color:var(--color-critical);"><use href="#icon-shield-alert"></use></svg>
+            </div>
+            <div class="posture-value-group">
+              <span class="posture-value" id="kpi-crit-findings-val">4</span>
+            </div>
+            <div class="posture-subtext" style="color:var(--color-critical);">
+              Requires immediate OT containment
+            </div>
+          </div>
+
+          <div class="posture-card kpi-high" onclick="document.getElementById('nav-btn-findings').click();">
+            <div class="posture-header">
+              <span class="posture-label">High-Risk Findings</span>
+              <svg class="icon icon-sm" style="color:var(--color-high);"><use href="#icon-alert-triangle"></use></svg>
+            </div>
+            <div class="posture-value-group">
+              <span class="posture-value" id="kpi-high-findings-val">18</span>
+            </div>
+            <div class="posture-subtext">
+              Unpatched DMZ & Supervisory CVEs
+            </div>
+          </div>
+
+          <div class="posture-card kpi-warning" onclick="document.getElementById('nav-btn-assets').click();">
+            <div class="posture-header">
+              <span class="posture-label">Exposed Crown Jewels</span>
+              <svg class="icon icon-sm" style="color:var(--color-medium);"><use href="#icon-crosshair"></use></svg>
+            </div>
+            <div class="posture-value-group">
+              <span class="posture-value" id="kpi-exp-assets-val">3</span>
+            </div>
+            <div class="posture-subtext">
+              Turbine TG-04, Chem Pump, Breaker
+            </div>
+          </div>
+
+          <div class="posture-card kpi-critical" onclick="document.getElementById('nav-btn-attack-paths').click();" title="Click to open Attack Path workspace">
+            <div class="posture-header">
+              <span class="posture-label">High-Risk Attack Paths</span>
+              <svg class="icon icon-sm" style="color:var(--color-critical);"><use href="#icon-zap"></use></svg>
+            </div>
+            <div class="posture-value-group">
+              <span class="posture-value" id="kpi-attack-paths-val">7</span>
+            </div>
+            <div class="posture-subtext" style="color:var(--color-orange-400);">
+              1 Confirmed Active Traversal
+            </div>
+          </div>
+        </div>
+
+        <div class="attack-path-preview-card">
+          <div class="path-meta-group">
+            <div class="path-tag-row">
+              <span class="badge badge-critical">CRITICAL ATTACK PATH</span>
+              <span class="badge badge-high">CONFIDENCE: 95%</span>
+              <span style="font-size:11px; color:var(--text-dim);">Cross-Zone Traversal</span>
+            </div>
+            <h2 class="path-title">External Gateway ➔ Workstation ➔ DMZ Jump ➔ SCADA ➔ Turbine Trip</h2>
+            <p class="path-description">
+              Adversary traversed from Enterprise IT (L4) through DMZ bastion into supervisory SCADA. Unauthenticated S7comm logic download observed targeting PLC-07.
+            </p>
+          </div>
+
+          <div class="path-preview-pipeline" aria-label="Attack Path Traversal Pipeline">
+            <div class="pipe-node">
+              <span class="pipe-node-type">Source</span>
+              <span class="pipe-node-name">Internet-GW-01</span>
+              <span class="pipe-node-zone">L4 Enterprise</span>
+            </div>
+            <div class="pipe-arrow">
+              <span>➔</span>
+              <span class="pipe-arrow-label">HTTPS</span>
+            </div>
+            <div class="pipe-node">
+              <span class="pipe-node-type">Pivot</span>
+              <span class="pipe-node-name">Engineering-PC-12</span>
+              <span class="pipe-node-zone">L4 Enterprise</span>
+            </div>
+            <div class="pipe-arrow">
+              <span>➔</span>
+              <span class="pipe-arrow-label">RDP</span>
+            </div>
+            <div class="pipe-node">
+              <span class="pipe-node-type">Pivot</span>
+              <span class="pipe-node-name">OT-Jump-02</span>
+              <span class="pipe-node-zone">L3.5 DMZ</span>
+            </div>
+            <div class="pipe-arrow">
+              <span>➔</span>
+              <span class="pipe-arrow-label">SSH</span>
+            </div>
+            <div class="pipe-node">
+              <span class="pipe-node-type">Pivot</span>
+              <span class="pipe-node-name">SCADA-01</span>
+              <span class="pipe-node-zone">L2 Supervisory</span>
+            </div>
+            <div class="pipe-arrow">
+              <span>➔</span>
+              <span class="pipe-arrow-label">S7comm</span>
+            </div>
+            <div class="pipe-node">
+              <span class="pipe-node-type">Target</span>
+              <span class="pipe-node-name">PLC-07</span>
+              <span class="pipe-node-zone">L1 Control</span>
+            </div>
+            <div class="pipe-arrow">
+              <span>➔</span>
+              <span class="pipe-arrow-label">Hardwire</span>
+            </div>
+            <div class="pipe-node crown-jewel">
+              <span class="pipe-node-type" style="color:var(--color-critical);">CROWN JEWEL</span>
+              <span class="pipe-node-name">Turbogen-TG-04</span>
+              <span class="pipe-node-zone">L0 Physical / SIS</span>
+            </div>
+          </div>
+
+          <button class="btn-primary" id="btn-investigate-path-cta">
+            <span>Investigate Path</span>
+            <svg class="icon icon-sm"><use href="#icon-arrow-right"></use></svg>
+          </button>
+        </div>
+
+        <div class="dashboard-row-split">
+
+          <div class="card-container">
+            <div class="card-header">
+              <div class="card-title-group">
+                <svg class="icon icon-md" style="color:var(--color-orange-500);"><use href="#icon-shield-alert"></use></svg>
+                <span class="card-title">Risk & Findings Distribution</span>
+              </div>
+              <span class="card-subtitle">CVSS & EPSS Correlated</span>
+            </div>
+
+            <div class="severity-bar-container">
+              <div class="severity-multi-bar" role="progressbar" aria-label="Severity distribution bar">
+                <div id="sev-bar-crit" class="sev-segment sev-critical" style="width: 25%;"></div>
+                <div id="sev-bar-high" class="sev-segment sev-high" style="width: 40%;"></div>
+                <div id="sev-bar-med" class="sev-segment sev-medium" style="width: 20%;"></div>
+                <div id="sev-bar-low" class="sev-segment sev-low" style="width: 15%;"></div>
+              </div>
+              <div class="severity-legend">
+                <div class="sev-legend-item">
+                  <span class="sev-dot sev-critical"></span>
+                  <span>Critical: <strong id="sev-count-crit">4</strong></span>
+                </div>
+                <div class="sev-legend-item">
+                  <span class="sev-dot sev-high"></span>
+                  <span>High: <strong id="sev-count-high">18</strong></span>
+                </div>
+                <div class="sev-legend-item">
+                  <span class="sev-dot sev-medium"></span>
+                  <span>Medium: <strong id="sev-count-med">29</strong></span>
+                </div>
+                <div class="sev-legend-item">
+                  <span class="sev-dot sev-low"></span>
+                  <span>Low: <strong id="sev-count-low">41</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-wrapper mini-table-wrapper">
+              <table class="findings-mini-table" aria-label="Major Unresolved Findings">
+                <thead>
+                  <tr>
+                    <th>Severity</th>
+                    <th>Finding & CVE</th>
+                    <th>Impacted Asset</th>
+                    <th>Observed</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-findings-tbody">
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-container">
+            <div class="card-header">
+              <div class="card-title-group">
+                <svg class="icon icon-md" style="color:var(--color-low);"><use href="#icon-server"></use></svg>
+                <span class="card-title">Asset Visibility & Data Completeness</span>
+              </div>
+              <span class="card-subtitle">Coverage: <strong id="kpi-coverage-val" style="color:var(--color-healthy);">94.0%</strong></span>
+            </div>
+
+            <div class="asset-stats-grid">
+              <div class="asset-stat-box">
+                <span class="asset-stat-label">Total Assets</span>
+                <span class="asset-stat-val" id="stat-total-assets">2,450</span>
+                <span class="asset-stat-sub">Discovered in network</span>
+              </div>
+              <div class="asset-stat-box">
+                <span class="asset-stat-label">Active / Online</span>
+                <span class="asset-stat-val" style="color:var(--color-healthy);" id="stat-active-assets">2,210</span>
+                <span class="asset-stat-sub">Real-time keepalive</span>
+              </div>
+              <div class="asset-stat-box">
+                <span class="asset-stat-label">Offline</span>
+                <span class="asset-stat-val" style="color:var(--text-dim);" id="stat-offline-assets">180</span>
+                <span class="asset-stat-sub">> 24h inactive</span>
+              </div>
+              <div class="asset-stat-box">
+                <span class="asset-stat-label">Unidentified</span>
+                <span class="asset-stat-val" style="color:var(--color-medium);" id="stat-unidentified-assets">42</span>
+                <span class="asset-stat-sub">Passive MAC only</span>
+              </div>
+              <div class="asset-stat-box stat-incomplete">
+                <span class="asset-stat-label">Incomplete Data</span>
+                <span class="asset-stat-val" id="stat-incomplete-assets">18</span>
+                <span class="asset-stat-sub">Sensor gap</span>
+              </div>
+              <div class="asset-stat-box">
+                <span class="asset-stat-label">Crown Jewels</span>
+                <span class="asset-stat-val" style="color:var(--color-critical);">12</span>
+                <span class="asset-stat-sub">Tier 1 Actuation</span>
+              </div>
+            </div>
+
+            <div class="panel-section-title" style="margin-top:6px;">Purdue Zone Security Boundaries & Cross-Zone Flow</div>
+            <div class="zone-matrix-list" id="zone-matrix-container">
+
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-row-bottom">
+
+          <div class="card-container">
+            <div class="card-header">
+              <div class="card-title-group">
+                <svg class="icon icon-md" style="color:var(--color-orange-400);"><use href="#icon-activity"></use></svg>
+                <span class="card-title">Recent Operational & Security Events</span>
+              </div>
+              <span class="card-subtitle">Real-time audit log</span>
+            </div>
+            <div class="timeline-feed" id="timeline-feed">
+
+            </div>
+          </div>
+
+          <div class="card-container">
+            <div class="card-header">
+              <div class="card-title-group">
+                <svg class="icon icon-md" style="color:var(--color-healthy);"><use href="#icon-radar"></use></svg>
+                <span class="card-title">Sensor Health & Visibility Taps</span>
+              </div>
+              <span class="card-subtitle">38 / 40 Collectors Healthy</span>
+            </div>
+            <div class="sensors-grid" id="sensors-grid">
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="view-attack-paths" class="view-section" aria-label="Attack Path Investigation Workspace">
+      <div class="attack-path-workspace">
+
+        <div class="graph-toolbar">
+          <div class="toolbar-left">
+
+            <div class="toolbar-select-group">
+              <label for="graph-path-selector">Path:</label>
+              <select id="graph-path-selector" class="toolbar-select" aria-label="Active Attack Path Selector">
+                <option value="path-01">Path 01: IT Phish ➔ DMZ ➔ SCADA ➔ Turbine Trip (Critical)</option>
+                <option value="path-02">Path 02: Vendor VPN ➔ Historian SQLi ➔ Chemical Pump (High)</option>
+                <option value="path-03">Path 03: Rogue Modem ➔ Tablet ➔ RTU-14 Breaker [DATA DEGRADED]</option>
+              </select>
+            </div>
+
+            <div class="mode-toggle-group">
+              <button class="mode-btn active" id="btn-mode-single">Single Path</button>
+              <button class="mode-btn" id="btn-mode-multi" onclick="showToast('Multi-Path Mode', 'Simultaneous traversal comparison enabled.', 'info');">Multi Path</button>
+            </div>
+
+            <button class="btn-secondary" id="btn-blast-radius-toggle" title="Compute and visualize reachable assets and blast radius">
+              <svg class="icon icon-sm"><use href="#icon-crosshair"></use></svg>
+              <span>Blast Radius</span>
+            </button>
+
+            <button class="btn-secondary legend-toggle-btn" id="btn-legend-toggle" aria-expanded="false" aria-controls="graph-legend-box" title="Toggle Attack Path Legend">
+              <svg class="icon icon-sm"><use href="#icon-info"></use></svg>
+              <span>Legend</span>
+            </button>
+          </div>
+
+          <div class="toolbar-right">
+
+            <div class="graph-search-wrapper" title="Search nodes in active attack path">
+              <svg class="icon icon-sm" style="color:var(--text-dim);"><use href="#icon-search"></use></svg>
+              <input type="text" id="graph-node-search-input" class="graph-search-input" placeholder="Find node / IP..." aria-label="Search node or IP in path">
+            </div>
+
+            <div class="confidence-filter-wrapper" title="Filter paths by telemetry confidence rating">
+              <span>Min Conf:</span>
+              <input type="range" id="graph-confidence-slider" class="confidence-slider" min="0" max="95" step="5" value="0" aria-label="Minimum telemetry confidence rating slider">
+              <strong id="confidence-val-label" style="font-family:var(--font-mono); color:var(--color-orange-400);">All (0%)</strong>
+            </div>
+
+            <div class="control-btn-group" style="flex-direction:row;">
+              <button id="btn-zoom-in" title="Zoom In" aria-label="Zoom in">
+                <svg class="icon icon-sm"><use href="#icon-plus"></use></svg>
+              </button>
+              <button id="btn-zoom-out" title="Zoom Out" aria-label="Zoom out">
+                <svg class="icon icon-sm"><use href="#icon-minus"></use></svg>
+              </button>
+              <button id="btn-fit-view" title="Fit to View" aria-label="Fit graph to view">
+                <svg class="icon icon-sm"><use href="#icon-maximize"></use></svg>
+              </button>
+              <button id="btn-reset-graph" title="Reset Graph" aria-label="Reset graph layout">
+                <svg class="icon icon-sm"><use href="#icon-refresh"></use></svg>
+              </button>
+            </div>
+            <span id="zoom-percentage-text" style="font-size:11px; color:var(--text-dim); font-family:var(--font-mono); min-width:36px;">100%</span>
+          </div>
+        </div>
+
+        <div class="graph-viewport-container" id="graph-viewport-container" aria-label="Interactive SVG Attack Path Graph">
+
+          <svg id="attack-path-svg" viewBox="0 0 1600 780" preserveAspectRatio="xMidYMid meet">
+
+          </svg>
+
+          <div class="graph-legend-box" id="graph-legend-box" aria-label="Graph Legend">
+            <div class="legend-header">
+              <span class="legend-title">Attack Path Legend</span>
+              <button class="legend-close-btn" id="btn-close-legend" aria-label="Close attack path legend">
+                <svg class="icon icon-sm"><use href="#icon-close"></use></svg>
+              </button>
+            </div>
+            <div class="legend-items">
+              <div class="legend-row">
+                <span class="legend-symbol symbol-source" style="background-color:var(--color-high);">▲</span>
+                <span>Source Node</span>
+              </div>
+              <div class="legend-row">
+                <span class="legend-symbol symbol-pivot" style="background-color:var(--text-dim);">◆</span>
+                <span>Pivot Node</span>
+              </div>
+              <div class="legend-row">
+                <span class="legend-symbol symbol-target" style="background-color:var(--color-critical);">⌖</span>
+                <span>Target Node</span>
+              </div>
+              <div class="legend-row">
+                <span class="legend-symbol symbol-crown" style="background-color:var(--color-critical); border:1px solid #FFF;">👑</span>
+                <span>Crown Jewel</span>
+              </div>
+              <div class="legend-row">
+                <span class="legend-symbol symbol-degraded" style="background-color:var(--color-degraded); border:1px dashed #FFF;">⚡</span>
+                <span>Degraded Data</span>
+              </div>
+              <div class="legend-row">
+                <span class="legend-symbol symbol-flow" style="background-color:var(--color-orange-500);">➔</span>
+                <span>Active Flow</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="graph-mobile-controls" id="graph-mobile-controls" aria-label="Mobile Graph Controls">
+            <button id="btn-mobile-zoom-in" class="mobile-ctrl-btn" aria-label="Zoom In" title="Zoom In">
+              <svg class="icon icon-sm"><use href="#icon-plus"></use></svg>
+            </button>
+            <button id="btn-mobile-zoom-out" class="mobile-ctrl-btn" aria-label="Zoom Out" title="Zoom Out">
+              <svg class="icon icon-sm"><use href="#icon-minus"></use></svg>
+            </button>
+            <button id="btn-mobile-fit-view" class="mobile-ctrl-btn" aria-label="Fit to View" title="Fit to View">
+              <svg class="icon icon-sm"><use href="#icon-maximize"></use></svg>
+            </button>
+            <button id="btn-mobile-blast" class="mobile-ctrl-btn" aria-label="Toggle Blast Radius" title="Blast Radius">
+              <svg class="icon icon-sm"><use href="#icon-crosshair"></use></svg>
+            </button>
+            <button id="btn-mobile-legend" class="mobile-ctrl-btn" aria-label="Toggle Legend" title="Legend">
+              <svg class="icon icon-sm"><use href="#icon-info"></use></svg>
+            </button>
+          </div>
+
+          <div class="investigation-panel-backdrop" id="investigation-panel-backdrop" aria-hidden="true"></div>
+
+          <aside class="investigation-panel" id="investigation-panel" role="dialog" aria-label="Contextual Investigation Panel">
+            <div class="panel-sheet-handle" aria-hidden="true"></div>
+            <div class="panel-header">
+              <div class="panel-title-area">
+                <span class="panel-type-badge purdue-l1" id="panel-type-badge">NODE • L1 CONTROL</span>
+                <h3 class="panel-asset-name" id="panel-asset-name">PLC-07</h3>
+              </div>
+              <div class="panel-header-actions">
+                <button class="panel-return-btn" id="panel-return-btn" aria-label="Return to attack graph">
+                  <span>← Graph</span>
+                </button>
+                <button class="panel-close-btn" id="panel-close-btn" aria-label="Close panel">
+                  <svg class="icon icon-md"><use href="#icon-close"></use></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="panel-tabs">
+              <button class="panel-tab-item active" data-panel-tab="summary">Overview & Context</button>
+              <button class="panel-tab-item" data-panel-tab="evidence" onclick="showToast('Telemetry Evidence', 'Deep PCAP flow traces loaded.', 'info');">Evidence (PCAP)</button>
+              <button class="panel-tab-item" data-panel-tab="mitigations" onclick="showToast('ISA/IEC 62443', 'Mitigation recommendations generated.', 'info');">Mitigations</button>
+            </div>
+
+            <div class="panel-body-scroll" id="panel-body-scroll">
+
+            </div>
+
+            <div class="panel-footer">
+              <div class="action-buttons-row">
+                <button class="btn-danger" id="btn-action-isolate" style="flex:1;">
+                  <svg class="icon icon-sm"><use href="#icon-lock"></use></svg>
+                  <span>Isolate Asset</span>
+                </button>
+                <button class="btn-secondary" id="btn-action-firewall" style="flex:1;">
+                  <svg class="icon icon-sm"><use href="#icon-shield"></use></svg>
+                  <span>Generate ACL</span>
+                </button>
+              </div>
+              <div class="action-buttons-row">
+                <button class="btn-secondary" id="btn-action-assign" style="flex:1;">
+                  <span>Assign to SOC</span>
+                </button>
+                <button class="btn-secondary" id="btn-action-ack" style="flex:1;">
+                  <span>Acknowledge</span>
+                </button>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="view-assets" class="view-section" aria-label="Asset Inventory View">
+      <div class="dashboard-grid">
+        <div class="card-container">
+          <div class="card-header">
+            <div class="card-title-group">
+              <svg class="icon icon-md" style="color:var(--color-orange-500);"><use href="#icon-server"></use></svg>
+              <span class="card-title">Comprehensive OT & IT Asset Inventory</span>
+            </div>
+            <span class="card-subtitle">Purdue Model Classified</span>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table" aria-label="Asset Inventory Table">
+              <thead>
+                <tr>
+                  <th>Asset Name & Vendor</th>
+                  <th>Purdue Zone</th>
+                  <th>IP Address</th>
+                  <th>Criticality</th>
+                  <th>Risk Score</th>
+                  <th>Telemetry Confidence</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="assets-table-tbody">
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-findings" class="view-section" aria-label="Findings & Vulnerabilities View">
+      <div class="dashboard-grid">
+        <div class="card-container">
+          <div class="card-header">
+            <div class="card-title-group">
+              <svg class="icon icon-md" style="color:var(--color-critical);"><use href="#icon-shield-alert"></use></svg>
+              <span class="card-title">Operational Technology Vulnerabilities & Findings</span>
+            </div>
+            <span class="card-subtitle">Correlated with MITRE ATT&CK for ICS</span>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table" aria-label="Full Findings Table">
+              <thead>
+                <tr>
+                  <th>Severity</th>
+                  <th>Finding Title & CVE</th>
+                  <th>Impacted Asset</th>
+                  <th>Zone</th>
+                  <th>MITRE ICS Technique</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="findings-full-tbody">
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-design-system" class="view-section" aria-label="Design System Component Catalog">
+      <div class="ds-container">
+        <div class="ds-header">
+          <h1 class="ds-title">
+            <svg class="icon icon-lg" style="color:var(--color-orange-500);"><use href="#icon-book-open"></use></svg>
+            AEGIS OT Design System & Component Reference
+          </h1>
+          <p class="ds-desc">
+            Standardized design tokens, accessible color palettes, Purdue Model visual semantics, and reusable OT cybersecurity components. Built strictly with Vanilla CSS3.
+          </p>
+        </div>
+
+        <div class="ds-section">
+          <h2 class="ds-section-title">Color Palette Tokens (Orange / Obsidian Slate / High Contrast)</h2>
+          <div class="ds-grid">
+            <div class="ds-color-card">
+              <div class="ds-color-swatch" style="background-color:var(--color-orange-500);"></div>
+              <div class="ds-color-info">
+                <strong>--color-orange-500 (#FF6B00)</strong><br>
+                Brand Accent / Action
+              </div>
+            </div>
+            <div class="ds-color-card">
+              <div class="ds-color-swatch" style="background-color:var(--color-canvas); border-bottom:1px solid var(--border-medium);"></div>
+              <div class="ds-color-info">
+                <strong>--color-canvas (#0B0E14)</strong><br>
+                Deep Obsidian Background
+              </div>
+            </div>
+            <div class="ds-color-card">
+              <div class="ds-color-swatch" style="background-color:var(--color-surface); border-bottom:1px solid var(--border-medium);"></div>
+              <div class="ds-color-info">
+                <strong>--color-surface (#10141C)</strong><br>
+                Card / Surface Background
+              </div>
+            </div>
+            <div class="ds-color-card">
+              <div class="ds-color-swatch" style="background-color:var(--color-critical);"></div>
+              <div class="ds-color-info">
+                <strong>--color-critical (#EF4444)</strong><br>
+                Critical Severity / Actuation Threat
+              </div>
+            </div>
+            <div class="ds-color-card">
+              <div class="ds-color-swatch" style="background-color:var(--color-high);"></div>
+              <div class="ds-color-info">
+                <strong>--color-high (#F97316)</strong><br>
+                High Severity / Lateral Movement
+              </div>
+            </div>
+            <div class="ds-color-card">
+              <div class="ds-color-swatch" style="background-color:var(--color-degraded);"></div>
+              <div class="ds-color-info">
+                <strong>--color-degraded (#D946EF)</strong><br>
+                Incomplete / Degraded Telemetry
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-section">
+          <h2 class="ds-section-title">Multi-Channel Severity & Purdue Zone Badges</h2>
+          <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+            <span class="badge badge-critical">Critical Severity</span>
+            <span class="badge badge-high">High Severity</span>
+            <span class="badge badge-medium">Medium Severity</span>
+            <span class="badge badge-low">Low / Informational</span>
+            <span class="badge badge-healthy">Healthy State</span>
+            <span class="badge badge-degraded">Degraded Telemetry</span>
+            <span class="badge badge-uncertain">Uncertain (Conf &lt; 70%)</span>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:12px;">
+            <span class="purdue-badge purdue-l4">L4: Enterprise</span>
+            <span class="purdue-badge purdue-l35">L3.5: Industrial DMZ</span>
+            <span class="purdue-badge purdue-l3">L3: Operations</span>
+            <span class="purdue-badge purdue-l2">L2: Supervisory SCADA</span>
+            <span class="purdue-badge purdue-l1">L1: Control (PLCs)</span>
+            <span class="purdue-badge purdue-l0">L0: Physical Process</span>
+          </div>
+        </div>
+
+        <div class="ds-section">
+          <h2 class="ds-section-title">Buttons & Action Controls</h2>
+          <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+            <button class="btn-primary">Primary Action</button>
+            <button class="btn-secondary">Secondary Action</button>
+            <button class="btn-danger">Critical Containment Action</button>
+            <button class="btn-icon" aria-label="Icon button"><svg class="icon icon-sm"><use href="#icon-refresh"></use></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="modal-overlay" id="confirmation-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="confirm-modal-title">
+          <svg class="icon icon-md" style="color:var(--color-critical);"><use href="#icon-alert-triangle"></use></svg>
+          Confirm Remediation Action
+        </h3>
+        <button class="btn-icon" style="border:none;" onclick="document.getElementById('confirmation-modal-overlay').classList.remove('open');">
+          <svg class="icon icon-sm"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="confirm-modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="confirm-modal-btn-cancel">Cancel</button>
+        <button class="btn-danger" id="confirm-modal-btn-confirm">Proceed with Isolation</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="rationale-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="rationale-modal-title">
+    <div class="modal-container" style="max-width:920px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="rationale-modal-title">
+          <svg class="icon icon-md" style="color:var(--color-orange-500);"><use href="#icon-info"></use></svg>
+          AEGIS OT Product Design Rationale & Architectural Whitepaper
+        </h3>
+        <button class="btn-icon" id="btn-close-rationale" style="border:none;" aria-label="Close rationale modal">
+          <svg class="icon icon-sm"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3>1. Information Prioritization (The 5–10 Second Rule)</h3>
+        <p>
+          In industrial operational environments, critical physical downtime can incur millions of dollars per hour or create catastrophic safety hazards. We prioritize <strong>Crown Jewel Exposure</strong> and <strong>Cross-Zone Traversal</strong> at the top of the information hierarchy. The executive hero row answers immediately: <em>Is the plant safe?</em> (Posture Score 82/100, 4 critical findings, 3 exposed crown jewels, 1 confirmed active path).
+        </p>
+
+        <h3>2. Supporting Leadership vs. Analyst Workflows</h3>
+        <ul>
+          <li><strong>CISO / Leadership:</strong> Receives high-level posture metrics, downtime impact estimates, monitoring coverage, and trend analytics without being overwhelmed by low-level PCAP details.</li>
+          <li><strong>SOC / OT Analysts:</strong> Can drill down from any KPI into the <em>Attack Path Investigation Workspace</em>, inspect raw industrial protocols (S7comm, Modbus, OPC UA), view CVE CVSS scores, and trigger containment actions.</li>
+          <li><strong>Plant Operators:</strong> "Why It Matters" callouts translate cyber vulnerabilities into tangible physical outcomes (e.g., "Turbogenerator Unit 4 emergency mechanical overspeed trip").</li>
+        </ul>
+
+        <h3>3. Preventing Attack-Path Visual Overload</h3>
+        <p>
+          Traditional network graph tools render unreadable "hairballs" of thousands of interconnected nodes. We prevent cognitive overload by:
+        </p>
+        <ul>
+          <li><strong>Purdue Model Visual Swimlanes:</strong> Organizing nodes strictly across Levels 0 through 4 to reflect industrial hierarchy.</li>
+          <li><strong>Path-Focused Traversal:</strong> Isolating the highest-risk attack trajectories rather than dumping the whole topology.</li>
+          <li><strong>Progressive Disclosure:</strong> Keeping detailed packet flows in the right-hand Investigation Drawer, opening only on demand.</li>
+          <li><strong>Dimming & Highlighting:</strong> Selecting a node or edge visibly dims non-essential graph elements.</li>
+        </ul>
+
+        <h3>4. Handling Uncertainty & Incomplete Telemetry</h3>
+        <p>
+          <strong>Critical Principle:</strong> <em>"Never represent incomplete data as a confirmed safe state."</em> When sensors degrade or packet loss occurs (demonstrated in the "Degraded Telemetry" demo state), the system refuses to show zero alerts. Instead, a prominent warning banner appears, confidence scores drop below 70%, and affected nodes display dashed magenta borders indicating unconfirmed data.
+        </p>
+
+        <h3>5. Scaling to Enterprise OT Environments</h3>
+        <p>
+          In large installations with tens of thousands of I/O points, the architecture scales through:
+        </p>
+        <ul>
+          <li>Hierarchical aggregation: Grouping L0/L1 devices under parent RTUs and PLCs.</li>
+          <li>Blast radius filtering: Computing upstream entry points and downstream actuators dynamically.</li>
+          <li>Confidence thresholds: Allowing analysts to filter out low-confidence speculative paths.</li>
+        </ul>
+
+        <h3>6. Assumptions & Architectural Boundaries</h3>
+        <p>
+          We assumed standard ISA/IEC 62443 Purdue architecture with dual-homed DMZ jump hosts and edge firewalls. Fictional asset names (Siemens S7-1500, OSIsoft PI, Palo Alto) were selected to reflect standard manufacturing and power generation topologies. All code is 100% native HTML5, CSS3, and ES6+ with zero third-party dependencies.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" onclick="document.getElementById('rationale-modal-overlay').classList.remove('open');">
+          Got it, Close Whitepaper
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
